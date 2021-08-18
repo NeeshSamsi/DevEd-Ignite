@@ -17,7 +17,7 @@ const getCurrentDate = () => {
     month: month,
     day: day,
     lastYear: `${parseInt(year) - 1}-${month}-${day}`,
-    nextYear: `${parseInt(year) - 1}-${month}-${day}`,
+    nextYear: `${parseInt(year) + 1}-${month}-${day}`,
   };
 };
 
@@ -25,5 +25,14 @@ const getCurrentDate = () => {
 const popular_games = `games?dates=${getCurrentDate().lastYear},${
   getCurrentDate().current
 }&ordering=-rating&page_size=10&key=${api_key}`;
+const upcoming_games = `games?dates=${getCurrentDate().current},${
+  getCurrentDate().nextYear
+}&ordering=-added&page_size=10&key=${api_key}`;
+const new_games = `games?dates=${getCurrentDate().lastYear},${
+  getCurrentDate().current
+}&ordering=-released&page_size=10&key=${api_key}`;
 
 export const popularGamesURL = () => `${base_url}${popular_games}`;
+export const upcomingGamesURL = () => `${base_url}${upcoming_games}`;
+console.log(upcomingGamesURL());
+export const newGamesURL = () => `${base_url}${new_games}`;
