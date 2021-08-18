@@ -1,7 +1,8 @@
 require("dotenv").config();
 
 // Base Url
-const base_url = process.env.REACT_APP_BASE_URL;
+const base_url = "https://api.rawg.io/api/";
+const api_key = "6f563b35a7e3493299a92f278245e4d5";
 
 // Get current day, month and year
 const getCurrentDate = () => {
@@ -23,6 +24,6 @@ const getCurrentDate = () => {
 // Popular Games
 const popular_games = `games?dates=${getCurrentDate().lastYear},${
   getCurrentDate().current
-}&ordering=-rating&page_size=10&key=${process.env.REACT_APP_API_KEY}`;
+}&ordering=-rating&page_size=10&key=${api_key}`;
 
 export const popularGamesURL = () => `${base_url}${popular_games}`;
