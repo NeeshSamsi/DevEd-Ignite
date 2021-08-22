@@ -34,5 +34,5 @@ const new_games = `games?dates=${getCurrentDate().lastYear},${
 
 export const popularGamesURL = () => `${base_url}${popular_games}`;
 export const upcomingGamesURL = () => `${base_url}${upcoming_games}`;
-console.log(upcomingGamesURL());
+
 export const newGamesURL = () => `${base_url}${new_games}`;
