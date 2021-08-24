@@ -9,47 +9,51 @@ import { useSelector } from "react-redux";
 
 const GameDetails = () => {
   // Data
-  const { game, screen } = useSelector((state) => state.details);
+  const { game, screen, isLoading } = useSelector((state) => state.details);
 
   return (
-    <StlCardShadow>
-      <StlDetails>
-        <StlStats>
-          <div className="rating">
-            <h3>{game.name}</h3>
-            <p>Rating: {game.rating}</p>
-          </div>
-          <StlInfo>
-            <h3>Platforms</h3>
-            <StlPlatforms>
-              {game.platforms &&
-                game.platforms.map((data) => (
-                  <h3 key={data.platform.id}>{data.platform.name}</h3>
-                ))}
-            </StlPlatforms>
-          </StlInfo>
-        </StlStats>
-        <StlMedia>
-          <img
-            src={game.background_image}
-            alt={game.name + "'s background image"}
-          />
-        </StlMedia>
-        <StlDescription>
-          <p>{game.description_raw}</p>
-        </StlDescription>
-        <div className="gallery">
-          {screen.results &&
-            screen.results.map((screen) => (
+    <>
+      {!isLoading && (
+        <StlCardShadow>
+          <StlDetails>
+            <StlStats>
+              <div className="rating">
+                <h3>{game.name}</h3>
+                <p>Rating: {game.rating}</p>
+              </div>
+              <StlInfo>
+                <h3>Platforms</h3>
+                <StlPlatforms>
+                  {game.platforms &&
+                    game.platforms.map((data) => (
+                      <h3 key={data.platform.id}>{data.platform.name}</h3>
+                    ))}
+                </StlPlatforms>
+              </StlInfo>
+            </StlStats>
+            <StlMedia>
               <img
-                src={screen.image}
-                alt={game.name + " screenshot"}
-                key={screen.id}
+                src={game.background_image}
+                alt={game.name + "'s background image"}
               />
-            ))}
-        </div>
-      </StlDetails>
-    </StlCardShadow>
+            </StlMedia>
+            <StlDescription>
+              <p>{game.description_raw}</p>
+            </StlDescription>
+            <div className="gallery">
+              {screen.results &&
+                screen.results.map((screen) => (
+                  <img
+                    src={screen.image}
+                    alt={game.name + " screenshot"}
+                    key={screen.id}
+                  />
+                ))}
+            </div>
+          </StlDetails>
+        </StlCardShadow>
+      )}
+    </>
   );
 };
 
@@ -98,7 +102,7 @@ const StlInfo = styled(motion.div)`
 
 const StlPlatforms = styled(motion.div)`
   display: flex;
-  width: 100%;
+  justify-content: space-evenly;
 
   img {
     margin-left: 3rem;
