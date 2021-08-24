@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 // Styling and Animation
 import styled from "styled-components";
@@ -18,9 +19,11 @@ const Game = ({ name, released, image, id }) => {
 
   return (
     <StlGame onClick={loadDetailsHandler}>
-      <h3>{name}</h3>
-      <p>{released}</p>
-      <img src={image} alt={name} />
+      <Link to={`/game/${id}`}>
+        <h3>{name}</h3>
+        <p>{released}</p>
+        <img src={image} alt={name} />
+      </Link>
     </StlGame>
   );
 };
@@ -31,6 +34,7 @@ const StlGame = styled(motion.div)`
   text-align: center;
   border-radius: 1rem;
   overflow: hidden;
+  cursor: pointer;
 
   img {
     width: 100%;

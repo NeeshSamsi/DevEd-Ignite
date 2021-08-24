@@ -98,7 +98,7 @@ const StlInfo = styled(motion.div)`
 
 const StlPlatforms = styled(motion.div)`
   display: flex;
-  justify-content: space-evenly;
+  width: 100%;
 
   img {
     margin-left: 3rem;
