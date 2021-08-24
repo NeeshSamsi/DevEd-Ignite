@@ -4,9 +4,20 @@ import React from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 
-const Game = ({ name, released, image }) => {
+// Redux
+import { useDispatch } from "react-redux";
+import { loadDetails } from "../actions/detailsAction";
+
+const Game = ({ name, released, image, id }) => {
+  // Load Details
+  const dispatch = useDispatch();
+
+  const loadDetailsHandler = () => {
+    dispatch(loadDetails(id));
+  };
+
   return (
-    <StlGame>
+    <StlGame onClick={loadDetailsHandler}>
       <h3>{name}</h3>
       <p>{released}</p>
       <img src={image} alt={name} />
