@@ -5,6 +5,7 @@ import { loadGames } from "../actions/gamesAction";
 
 // Components
 import Game from "../components/Game";
+import GameDetails from "../components/GameDetails";
 
 // Styling and Animation
 import styled from "styled-components";
@@ -23,6 +24,7 @@ const Home = () => {
 
   return (
     <StlGameList>
+      <GameDetails />
       <h2>Upcoming Games</h2>
       <StlGames>
         {upcoming.map((game) => (
