@@ -8,6 +8,18 @@ import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
+// Images
+// Platforms
+import playstation from "../img/playstation.svg";
+import steam from "../img/steam.svg";
+import xbox from "../img/xbox.svg";
+import nintendo from "../img/nintendo.svg";
+import apple from "../img/apple.svg";
+import gamepad from "../img/gamepad.svg";
+// Stars
+import starEmpty from "../img/star-empty.png";
+import starFull from "../img/star-full.png";
+
 const GameDetails = () => {
   const history = useHistory();
   // Exit Details
@@ -20,6 +32,40 @@ const GameDetails = () => {
     }
   };
 
+  // Text to Platform Icon
+  const getPlatformIcon = (platform) => {
+    switch (platform) {
+      case "PlayStation 4":
+        return playstation;
+      case "Xbox One" || "Xbox Series S/X":
+        return xbox;
+      case "PC":
+        return steam;
+      case "Nintendo Switch":
+        return nintendo;
+      case "IOS":
+        return apple;
+      default:
+        return gamepad;
+    }
+  };
+
+  // Rating to Stars
+  const getRatingStars = () => {
+    const stars = [];
+    const rating = Math.floor(game.rating);
+
+    for (let i = 1; i <= 5; i++) {
+      if (i <= rating) {
+        stars.push(<img src={starFull} alt="star" key={i} />);
+      } else {
+        stars.push(<img src={starEmpty} alt="empty star" key={i} />);
+      }
+    }
+
+    return stars;
+  };
+
   // Data
   const { game, screen, isLoading } = useSelector((state) => state.details);
 
@@ -27,18 +73,23 @@ const GameDetails = () => {
     <>
       {!isLoading && (
         <StlCardShadow className="shadow" onClick={exitDetailsHandler}>
-          <StlDetails>
+          <StlDetails layoutId>
             <StlStats>
               <div className="rating">
                 <h3>{game.name}</h3>
                 <p>Rating: {game.rating}</p>
+                {getRatingStars()}
               </div>
               <StlInfo>
                 <h3>Platforms</h3>
                 <StlPlatforms>
                   {game.platforms &&
                     game.platforms.map((data) => (
-                      <h3 key={data.platform.id}>{data.platform.name}</h3>
+                      <img
+                        src={getPlatformIcon(data.platform.name)}
+                        alt={data.platform.name + " Icon"}
+                        key={data.platform.id}
+                      />
                     ))}
                 </StlPlatforms>
               </StlInfo>
@@ -106,6 +157,12 @@ const StlStats = styled(motion.div)`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  img {
+    width: 2rem;
+    height: 2rem;
+    display: inline;
+  }
 `;
 
 const StlInfo = styled(motion.div)`
